@@ -4,15 +4,13 @@ import java.util.Date;
 
 public class Factura {
     private String codigo;
-    private String local;
     private float total;
     private Cliente cliente;
     private Plan plan;
     private Date fecha;
 
-    public Factura(String codigo, String local, float total, Cliente cliente, Plan plan, Date fecha) {
+    public Factura(String codigo, float total, Cliente cliente, Plan plan, Date fecha) {
         this.codigo = codigo;
-        this.local = local;
         this.total = total;
         this.cliente = cliente;
         this.plan = plan;
@@ -25,14 +23,6 @@ public class Factura {
 
     public void setCodigo(String codigo) {
         this.codigo = codigo;
-    }
-
-    public String getLocal() {
-        return local;
-    }
-
-    public void setLocal(String local) {
-        this.local = local;
     }
 
     public float getTotal() {

@@ -1,7 +1,8 @@
 package logico;
 
 import java.util.ArrayList;
-import java.util.Date; //por si acaso 
+
+//import java.util.Date; //por si acaso 
 
 public class Plan {
     private String nombre;

@@ -10,6 +10,7 @@ public class Cliente extends Persona
 			String correo, char sexo)
 	{
 		super(codigo, cedula, nombre, apellido, telefono, direccion, correo, sexo);
+		planes = new ArrayList<>();
 	}
 
 	public ArrayList<Plan> getPlanes()
