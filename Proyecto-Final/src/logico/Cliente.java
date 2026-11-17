@@ -1,35 +1,23 @@
 package logico;
 
-public class Cliente
+public class Cliente extends Persona
 {
-	private String nombre, telefono;
+	private ArrayList<Plan> planes;
 
-	public Cliente(String nombre, String telefono)
+	public Cliente(String codigo, String cedula, String nombre, String apellido, String telefono, String direccion,
+			String correo, char sexo)
 	{
-		this.nombre = nombre;
-		this.telefono = telefono;
+		super(codigo, cedula, nombre, apellido, telefono, direccion, correo, sexo);
 	}
 
-	public String getNombre()
+	public ArrayList<Plan> getPlanes()
 	{
-		return nombre;
+		return planes;
 	}
 
-	public void setNombre(String nombre)
+	public void setPlanes(ArrayList<Plan> planes)
 	{
-		this.nombre = nombre;
+		this.planes = planes;
 	}
-
-	public String getTelefono()
-	{
-		return telefono;
-	}
-
-	public void setTelefono(String telefono)
-	{
-		this.telefono = telefono;
-	}
-	
-	
 
 }
