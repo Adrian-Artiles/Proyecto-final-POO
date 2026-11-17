@@ -1,5 +1,7 @@
 package logico;
 
+import java.util.ArrayList;
+
 public class Cliente extends Persona
 {
 	private ArrayList<Plan> planes;
