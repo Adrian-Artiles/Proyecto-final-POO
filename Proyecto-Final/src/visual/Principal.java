@@ -207,7 +207,6 @@ public class Principal extends JFrame {
         });
     }
     
-
     private JButton crearBotonMenu(String titulo, String descripcion, Color colorAcento) {
         JButton btn = new JButton("<html><div style='text-align:left;'><span style='font-size:15px;font-weight:bold;'>" + titulo + "</span><br><span style='font-size:11px;color:#666666;'>" + descripcion + "</span></div></html>");
         btn.setBackground(Color.WHITE);
