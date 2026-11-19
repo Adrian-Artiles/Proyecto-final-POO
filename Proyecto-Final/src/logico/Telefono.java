@@ -22,8 +22,8 @@ public class Telefono extends Servicio {
         return datos;
     }
 
+    
     public void setDatos(int datos) {
         this.datos = datos;
-        
     }
 }
