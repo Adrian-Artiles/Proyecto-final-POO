@@ -4,6 +4,10 @@ import java.time.LocalDate;
 
 public class Comercial extends Empleado
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6321178053883048755L;
 	private float comision;
 	private int ventas;
 
@@ -33,6 +37,12 @@ public class Comercial extends Empleado
 	public void setVentas(int ventas)
 	{
 		this.ventas = ventas;
+	}
+
+	@Override
+	public float calcularSalario()
+	{
+		return salarioBase + (comision * ventas);
 	}
 
 }

@@ -12,11 +12,13 @@ public class Orange
 	private ArrayList<Plan> planes;
 	private ArrayList<Factura> ventas;
 	private static Orange o = null;
+	public static final float ITBIS = 0.18f;
 
 	private Orange()
 	{
 		this.usuariosEmpleados = new HashMap<>();
 		this.usuariosCliente = new HashMap<>();
+		this.contratos = new ArrayList<>();
 		this.planes = new ArrayList<>();
 		this.ventas = new ArrayList<>();
 	}
@@ -49,6 +51,16 @@ public class Orange
 	public void setUsuariosCliente(HashMap<String, Cliente> usuariosCliente)
 	{
 		this.usuariosCliente = usuariosCliente;
+	}
+
+	public ArrayList<Contrato> getContratos()
+	{
+		return contratos;
+	}
+
+	public void setContratos(ArrayList<Contrato> contratos)
+	{
+		this.contratos = contratos;
 	}
 
 	public ArrayList<Plan> getPlanes()

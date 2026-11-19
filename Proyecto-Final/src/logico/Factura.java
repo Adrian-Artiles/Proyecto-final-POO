@@ -8,14 +8,25 @@ public class Factura {
     private Plan plan;
     private Date fecha;
 
-    public Factura(String codigo, float total, Plan plan, Date fecha) {
+    public Factura(String codigo, Plan plan, Date fecha) {
         this.codigo = codigo;
-        this.total = total;
+        this.itbis = calcularItbis();
+        this.total = calcularTotal();
         this.plan = plan;
         this.fecha = fecha;
     }
 
-    public String getCodigo() {
+    private float calcularTotal()
+	{
+		return plan.getPrecio() + itbis;
+	}
+    
+    private float calcularItbis() 
+    {
+    	return (float) (plan.getPrecio() * Orange.ITBIS);
+    }
+
+	public String getCodigo() {
         return codigo;
     }
 
@@ -56,4 +67,6 @@ public class Factura {
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
+    
+    
 }

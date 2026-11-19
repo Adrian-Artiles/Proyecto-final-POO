@@ -4,6 +4,10 @@ import java.util.ArrayList;
 
 public class Cliente extends Persona
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5301228225327706307L;
 	private ArrayList<Plan> planes;
 
 	public Cliente(String codigo, String cedula, String nombre, String apellido, String telefono, String direccion,

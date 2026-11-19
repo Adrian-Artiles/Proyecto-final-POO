@@ -4,6 +4,10 @@ import java.time.LocalDate;
 
 public abstract class Empleado extends Persona
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5048346372995929298L;
 	protected float salarioBase;
 	protected LocalDate fechaIng;
 
@@ -34,5 +38,7 @@ public abstract class Empleado extends Persona
 	{
 		this.fechaIng = fechaIng;
 	}
+	
+	public abstract float calcularSalario();
 	
 }
