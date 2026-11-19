@@ -21,11 +21,7 @@ import javax.swing.border.EmptyBorder;
 
 public class Principal extends JFrame {
 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
+    private JPanel contentPane;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
