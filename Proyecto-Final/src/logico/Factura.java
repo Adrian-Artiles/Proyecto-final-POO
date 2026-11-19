@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Factura {
     private String codigo;
-    private float total;
+    private float total, itbis;
     private Plan plan;
     private Date fecha;
 
@@ -31,7 +31,17 @@ public class Factura {
         this.total = total;
     }
 
-    public Plan getPlan() {
+    public float getItbis()
+	{
+		return itbis;
+	}
+
+	public void setItbis(float itbis)
+	{
+		this.itbis = itbis;
+	}
+
+	public Plan getPlan() {
         return plan;
     }
 
