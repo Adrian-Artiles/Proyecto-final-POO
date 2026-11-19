@@ -1,16 +1,28 @@
 package logico;
 
 public class Telefono extends Servicio {
+	private String numero;
     private int minutosLlamada;
     private int datos;
 
-    public Telefono(String codigo, float precio, int minutosLlamada, int datos) {
+    public Telefono(String codigo, float precio, String numero, int minutosLlamada, int datos) {
         super(codigo, precio);
+        this.numero = numero;
         this.minutosLlamada = minutosLlamada;
         this.datos = datos;
     }
 
-    public int getMinutosLlamada() {
+    public String getNumero()
+	{
+		return numero;
+	}
+
+	public void setNumero(String numero)
+	{
+		this.numero = numero;
+	}
+
+	public int getMinutosLlamada() {
         return minutosLlamada;
     }
 
@@ -22,7 +34,6 @@ public class Telefono extends Servicio {
         return datos;
     }
 
-    
     public void setDatos(int datos) {
         this.datos = datos;
     }

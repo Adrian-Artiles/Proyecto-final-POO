@@ -1,11 +1,11 @@
 package logico;
 
-public class Hogar extends Servicio {
+public class InternetHogar extends Servicio {
     private int velocidadSubida;
     private int velocidadBajada;
     private String direccion;
 
-    public Hogar(String codigo, float precio, int velocidadSubida, int velocidadBajada, String direccion) {
+    public InternetHogar(String codigo, float precio, int velocidadSubida, int velocidadBajada, String direccion) {
         super(codigo, precio);
         this.velocidadSubida = velocidadSubida;
         this.velocidadBajada = velocidadBajada;
