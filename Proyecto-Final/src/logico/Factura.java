@@ -5,14 +5,12 @@ import java.util.Date;
 public class Factura {
     private String codigo;
     private float total;
-    private Cliente cliente;
     private Plan plan;
     private Date fecha;
 
-    public Factura(String codigo, float total, Cliente cliente, Plan plan, Date fecha) {
+    public Factura(String codigo, float total, Plan plan, Date fecha) {
         this.codigo = codigo;
         this.total = total;
-        this.cliente = cliente;
         this.plan = plan;
         this.fecha = fecha;
     }
@@ -31,14 +29,6 @@ public class Factura {
 
     public void setTotal(float total) {
         this.total = total;
-    }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
     }
 
     public Plan getPlan() {

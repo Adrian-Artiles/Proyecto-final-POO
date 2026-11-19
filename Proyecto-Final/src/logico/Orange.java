@@ -7,7 +7,7 @@ import java.util.HashMap;
 public class Orange
 {
 	private HashMap<String, Cliente> usuariosCliente;
-	private HashMap<String, Trabajador> usuariosTrabajadores;
+	private HashMap<String, Empleado> usuariosTrabajadores;
 	private ArrayList<Plan> planes;
 	private ArrayList<Factura> ventas;
 	private static Orange o = null;
@@ -30,12 +30,12 @@ public class Orange
 		return o;
 	}
 
-	public HashMap<String, Trabajador> getUsuariosTrabajadores()
+	public HashMap<String, Empleado> getUsuariosTrabajadores()
 	{
 		return usuariosTrabajadores;
 	}
 
-	public void setUsuariosTrabajadores(HashMap<String, Trabajador> usuariosTrabajadores)
+	public void setUsuariosTrabajadores(HashMap<String, Empleado> usuariosTrabajadores)
 	{
 		this.usuariosTrabajadores = usuariosTrabajadores;
 	}
@@ -83,9 +83,9 @@ public class Orange
 		return null;
 	}
 
-	public Trabajador buscarTrabajadorByEmail(String correo)
+	public Empleado buscarTrabajadorByEmail(String correo)
 	{
-		for (Trabajador t: usuariosTrabajadores.values())
+		for (Empleado t: usuariosTrabajadores.values())
 		{
 			if(t.getCorreo().equalsIgnoreCase(correo)) 
 			{
