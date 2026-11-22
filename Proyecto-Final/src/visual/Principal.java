@@ -66,6 +66,11 @@ public class Principal extends JFrame {
         menuBar.add(mnClientes);
 
         JMenuItem mntmRegCliente = new JMenuItem("registrar cliente");
+        mntmRegCliente.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		
+        	}
+        });
         mntmRegCliente.setFont(new Font("SansSerif", Font.PLAIN, 12));
         mnClientes.add(mntmRegCliente);
 

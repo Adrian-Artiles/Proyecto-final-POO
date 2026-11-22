@@ -6,18 +6,19 @@ import java.util.HashMap;
 
 public class Orange
 {
-	private HashMap<String, Cliente> usuariosCliente;
-	private HashMap<String, Empleado> usuariosEmpleados;
+	private ArrayList<Cliente> clientes;
+	private ArrayList<Empleado> empleados;
 	private ArrayList<Contrato> contratos;
 	private ArrayList<Plan> planes;
 	private ArrayList<Factura> ventas;
+	private ArrayList<Usuario> usuarios;
 	private static Orange o = null;
 	public static final float ITBIS = 0.18f;
 
 	private Orange()
 	{
-		this.usuariosEmpleados = new HashMap<>();
-		this.usuariosCliente = new HashMap<>();
+		this.empleados = new ArrayList<>();
+		this.clientes = new ArrayList<>();
 		this.contratos = new ArrayList<>();
 		this.planes = new ArrayList<>();
 		this.ventas = new ArrayList<>();
@@ -32,25 +33,10 @@ public class Orange
 
 		return o;
 	}
-
-	public HashMap<String, Empleado> getUsuariosEmpleados()
+	
+	public static void setOrange(Orange r) 
 	{
-		return usuariosEmpleados;
-	}
-
-	public void setUsuariosEmpleados(HashMap<String, Empleado> usuariosTrabajadores)
-	{
-		this.usuariosEmpleados = usuariosTrabajadores;
-	}
-
-	public HashMap<String, Cliente> getUsuariosCliente()
-	{
-		return usuariosCliente;
-	}
-
-	public void setUsuariosCliente(HashMap<String, Cliente> usuariosCliente)
-	{
-		this.usuariosCliente = usuariosCliente;
+		o = r;
 	}
 
 	public ArrayList<Contrato> getContratos()
@@ -85,7 +71,7 @@ public class Orange
 
 	public Cliente buscarClienteByEmail(String correo)
 	{
-		for (Cliente c : usuariosCliente.values())
+		for (Cliente c : clientes)
 		{
 			if(c.getCorreo().equalsIgnoreCase(correo)) 
 			{
@@ -98,7 +84,7 @@ public class Orange
 
 	public Empleado buscarTrabajadorByEmail(String correo)
 	{
-		for (Empleado t: usuariosEmpleados.values())
+		for (Empleado t: empleados)
 		{
 			if(t.getCorreo().equalsIgnoreCase(correo)) 
 			{
@@ -133,6 +119,25 @@ public class Orange
 		}
 
 		return null;
+	}
+	
+	public Usuario buscarUserByName(String user) 
+	{
+		for (Usuario u: usuarios)
+		{
+			if(u.getUserName().equalsIgnoreCase(user)) 
+			{
+				return u;
+			}
+		}
+
+		return null;
+	}
+
+	public void regUsuario(Usuario aux)
+	{
+		usuarios.add(aux);
+		
 	}
 
 }
