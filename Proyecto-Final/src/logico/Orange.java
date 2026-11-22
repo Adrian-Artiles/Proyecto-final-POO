@@ -1,17 +1,20 @@
 package logico;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
-import java.util.HashMap;
 
-
-public class Orange
+public class Orange implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3036088393140392770L;
 	private ArrayList<Cliente> clientes;
 	private ArrayList<Empleado> empleados;
 	private ArrayList<Contrato> contratos;
 	private ArrayList<Plan> planes;
 	private ArrayList<Factura> ventas;
-	private ArrayList<Usuario> usuarios;
 	private static Orange o = null;
 	public static final float ITBIS = 0.18f;
 
@@ -120,23 +123,23 @@ public class Orange
 
 		return null;
 	}
-	
-	public Usuario buscarUserByName(String user) 
+
+	public Persona buscarUserByNameE(String user)
 	{
-		for (Usuario u: usuarios)
+		for (Empleado e: empleados)
 		{
-			if(u.getUserName().equalsIgnoreCase(user)) 
+			if(e.getCodigo().equalsIgnoreCase(user)) 
 			{
-				return u;
+				return e;
 			}
 		}
-
+		
 		return null;
 	}
 
-	public void regUsuario(Usuario aux)
+	public void regAdmin(Administrador aux)
 	{
-		usuarios.add(aux);
+		empleados.add(aux);
 		
 	}
 

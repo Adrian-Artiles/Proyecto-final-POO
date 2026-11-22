@@ -1,7 +1,11 @@
 package logico;
 
 public class InternetHogar extends Servicio {
-    private int velocidadSubida;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7723183833292069825L;
+	private int velocidadSubida;
     private int velocidadBajada;
     private String direccion;
 

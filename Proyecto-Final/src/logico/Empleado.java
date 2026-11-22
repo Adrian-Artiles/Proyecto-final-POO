@@ -12,9 +12,9 @@ public abstract class Empleado extends Persona
 	protected LocalDate fechaIng;
 
 	public Empleado(String codigo, String cedula, String nombre, String apellido, String telefono, String direccion,
-			String correo, char sexo, float salarioBase, LocalDate fechaIng)
+			String correo, String userName, String clave, char sexo, float salarioBase, LocalDate fechaIng)
 	{
-		super(codigo, cedula, nombre, apellido, telefono, direccion, correo, sexo);
+		super(codigo, cedula, nombre, apellido, telefono, direccion, correo, userName, clave, sexo);
 		this.salarioBase = salarioBase;
 		this.fechaIng = fechaIng;
 	}

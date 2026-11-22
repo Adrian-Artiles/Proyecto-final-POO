@@ -1,11 +1,16 @@
 package logico;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 //import java.util.Date; //por si acaso 
 
-public class Plan {
-    private String nombre;
+public class Plan implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8194983308007589548L;
+	private String nombre;
     private String codigo;
     private float precio;
     private ArrayList<Servicio> servicios;

@@ -2,6 +2,7 @@ package visual;
 
 import java.awt.BorderLayout;
 
+
 import java.awt.EventQueue;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -9,13 +10,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.time.LocalDate;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import logico.Administrador;
 import logico.Orange;
-import logico.Usuario;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -27,6 +29,10 @@ import java.awt.event.ActionEvent;
 public class Login extends JFrame
 {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6498829247915543098L;
 	private JPanel contentPane;
 	private JTextField txtUser;
 	private JPasswordField txtPass;
@@ -55,8 +61,8 @@ public class Login extends JFrame
 					try {
 						empresa2 = new  FileOutputStream("Orange.dat");
 						empresaWrite = new ObjectOutputStream(empresa2);
-						Usuario aux = new Usuario("U0", "Administrador", "Administrador", "Admin", null);
-						Orange.getInstancia().regUsuario(aux);
+						Administrador aux = new Administrador("A-0", "00000000000", "", "", "", "", "", "Administrador", "admin", 'M', 0, LocalDate.now(), "");
+						Orange.getInstancia().regAdmin(aux);
 						empresaWrite.writeObject(Orange.getInstancia());
 						empresa2.close();
 						empresaWrite.close();
@@ -87,6 +93,7 @@ public class Login extends JFrame
 		setTitle("Login");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 639, 425);
+		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -116,7 +123,7 @@ public class Login extends JFrame
 		JButton btnLogin = new JButton("INICIAR SESION");
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+			 
 			}
 		});
 		btnLogin.setBounds(25, 206, 125, 25);

@@ -2,6 +2,10 @@ package logico;
 
 public class Cable extends Servicio
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2889047717103561938L;
 	private int cantCanales;
 	private boolean hd;
 	

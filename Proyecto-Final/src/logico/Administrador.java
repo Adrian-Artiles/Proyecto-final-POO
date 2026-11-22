@@ -2,8 +2,6 @@ package logico;
 
 import java.time.LocalDate;
 
-import javafx.util.converter.LocalDateStringConverter;
-
 public class Administrador extends Empleado
 {
 	/**
@@ -13,9 +11,11 @@ public class Administrador extends Empleado
 	private String departamento;
 
 	public Administrador(String codigo, String cedula, String nombre, String apellido, String telefono,
-			String direccion, String correo, char sexo, float salarioBase, LocalDate fechaIng, String departamento)
+			String direccion, String correo, String userName, String clave, char sexo, float salarioBase,
+			LocalDate fechaIng, String departamento)
 	{
-		super(codigo, cedula, nombre, apellido, telefono, direccion, correo, sexo, salarioBase, fechaIng);
+		super(codigo, cedula, nombre, apellido, telefono, direccion, correo, userName, clave, sexo, salarioBase,
+				fechaIng);
 		this.departamento = departamento;
 	}
 

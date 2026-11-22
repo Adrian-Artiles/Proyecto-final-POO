@@ -8,11 +8,11 @@ public abstract class Persona implements Serializable
 	 * 
 	 */
 	private static final long serialVersionUID = -6627593761722309894L;
-	protected String codigo, cedula, nombre, apellido, telefono, direccion, correo;
+	protected String codigo, cedula, nombre, apellido, telefono, direccion, correo, userName, clave;
 	protected char sexo;
 	
 	public Persona(String codigo, String cedula, String nombre, String apellido, String telefono, String direccion,
-			String correo, char sexo)
+			String correo, String userName, String clave, char sexo)
 	{
 		this.codigo = codigo;
 		this.cedula = cedula;
@@ -21,6 +21,8 @@ public abstract class Persona implements Serializable
 		this.telefono = telefono;
 		this.direccion = direccion;
 		this.correo = correo;
+		this.userName = userName;
+		this.clave = clave;
 		this.sexo = sexo;
 	}
 	
@@ -87,6 +89,26 @@ public abstract class Persona implements Serializable
 	public void setSexo(char sexo)
 	{
 		this.sexo = sexo;
+	}
+
+	public String getUserName()
+	{
+		return userName;
+	}
+
+	public void setUserName(String userName)
+	{
+		this.userName = userName;
+	}
+
+	public String getClave()
+	{
+		return clave;
+	}
+
+	public void setClave(String clave)
+	{
+		this.clave = clave;
 	}
 	
 }

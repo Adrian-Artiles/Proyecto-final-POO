@@ -1,6 +1,10 @@
 package logico;
 
 public class Telefono extends Servicio {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1085834337029539445L;
 	private String numero;
     private int minutosLlamada;
     private int datos;
