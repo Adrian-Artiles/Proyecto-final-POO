@@ -12,6 +12,7 @@ public class Orange implements Serializable
 	private static final long serialVersionUID = -3036088393140392770L;
 	private ArrayList<Cliente> clientes;
 	private ArrayList<Empleado> empleados;
+	private ArrayList<Persona> usuarios;
 	private ArrayList<Contrato> contratos;
 	private ArrayList<Plan> planes;
 	private ArrayList<Factura> ventas;
@@ -25,6 +26,7 @@ public class Orange implements Serializable
 		this.contratos = new ArrayList<>();
 		this.planes = new ArrayList<>();
 		this.ventas = new ArrayList<>();
+		this.usuarios = new ArrayList<>();
 	}
 
 	public static Orange getInstancia() 
@@ -135,6 +137,48 @@ public class Orange implements Serializable
 		}
 		
 		return null;
+	}
+	
+	public Persona buscarUserByNameC(String user)
+	{
+		for (Cliente c: clientes)
+		{
+			if(c.getCodigo().equalsIgnoreCase(user)) 
+			{
+				return c;
+			}
+		}
+		
+		return null;
+	}
+	
+	public Persona loginCorrecto(String user, String clave)
+	{
+		Persona aux = null;
+		boolean encontrado = false;
+		int i = 0;
+		while(!encontrado && i < usuarios.size()) 
+		{
+			Persona u = usuarios.get(i);
+			if(u.getUserName().equals(user) && u.getClave().equals(clave)) 
+			{
+				encontrado = true;
+				if(u instanceof Cliente) 
+				{
+					aux = (Cliente) u;
+				}
+				else if(u instanceof Comercial) 
+				{
+					aux = (Comercial) u;
+				}
+				else 
+				{
+					aux = (Administrador) u;
+				}
+			}
+		}
+		
+		return aux;
 	}
 
 	public void regAdmin(Administrador aux)

@@ -288,11 +288,7 @@ public class RegUser extends JDialog
 		{
 			valido = false;
 		}
-		else if(pass.length() != 8) 
-		{
-			valido = false;
-		}
-		else if(pass.contains(" "))
+		else if(pass.length() < 8 || pass.length() > 12) 
 		{
 			valido = false;
 		}

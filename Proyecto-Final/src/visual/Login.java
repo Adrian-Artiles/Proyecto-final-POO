@@ -17,7 +17,10 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import logico.Administrador;
+import logico.Cliente;
+import logico.Comercial;
 import logico.Orange;
+import logico.Persona;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -74,7 +77,7 @@ public class Login extends JFrame
 				} catch (ClassNotFoundException e) {
 					e.printStackTrace();
 				}
-				
+
 				try {
 					Login frame = new Login();
 					frame.setVisible(true);
@@ -98,32 +101,56 @@ public class Login extends JFrame
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
-		
+
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
-		
+
 		JLabel lblNewLabel = new JLabel("USUARIO:");
 		lblNewLabel.setBounds(25, 86, 93, 30);
 		panel.add(lblNewLabel);
-		
+
 		txtUser = new JTextField();
 		txtUser.setBounds(119, 86, 200, 30);
 		panel.add(txtUser);
 		txtUser.setColumns(10);
-		
+
 		JLabel lblNewLabel_1 = new JLabel("CONTRASE\u00D1A:");
 		lblNewLabel_1.setBounds(25, 146, 93, 30);
 		panel.add(lblNewLabel_1);
-		
+
 		txtPass = new JPasswordField();
 		txtPass.setBounds(119, 146, 200, 30);
 		panel.add(txtPass);
-		
+
 		JButton btnLogin = new JButton("INICIAR SESION");
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-			 
+				Persona u = Orange.getInstancia().loginCorrecto(txtUser.getText(), String.valueOf(txtPass.getPassword()));
+				if(u != null)
+				{
+					if(u instanceof Cliente) 
+					{
+						PCliente pc = new PCliente((Cliente) u);
+						pc.setVisible(true);
+					}
+					else if(u instanceof Comercial) 
+					{
+						Principal p = new Principal((Comercial) u);
+						p.setVisible(true);
+					}
+					else 
+					{
+						Principal p = new Principal((Administrador) u);
+						p.setVisible(true);
+					}
+					
+					dispose();
+				}
+				else 
+				{
+					txtPass.setText("");
+				}
 			}
 		});
 		btnLogin.setBounds(25, 206, 125, 25);

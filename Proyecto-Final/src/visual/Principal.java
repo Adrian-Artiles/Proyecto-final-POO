@@ -19,6 +19,8 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import logico.Empleado;
+
 public class Principal extends JFrame {
 
     /**
@@ -26,12 +28,13 @@ public class Principal extends JFrame {
 	 */
 	private static final long serialVersionUID = -2338171001859749383L;
 	private JPanel contentPane;
+	private Empleado e;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    Principal frame = new Principal();
+                    Principal frame = new Principal(null);
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -40,7 +43,8 @@ public class Principal extends JFrame {
         });
     }
 
-    public Principal() {
+    public Principal(Empleado aux) {
+    	e = aux;
         setTitle("orange - sistema de control");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 960, 620);
