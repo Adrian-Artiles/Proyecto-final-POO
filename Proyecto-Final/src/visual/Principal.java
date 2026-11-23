@@ -19,7 +19,12 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import logico.Comercial;
 import logico.Empleado;
+import logico.Orange;
+
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class Principal extends JFrame {
 
@@ -29,6 +34,8 @@ public class Principal extends JFrame {
 	private static final long serialVersionUID = -2338171001859749383L;
 	private JPanel contentPane;
 	private Empleado e;
+	private JMenu mnPersonal;
+	private JMenu mnServicios;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -44,8 +51,15 @@ public class Principal extends JFrame {
     }
 
     public Principal(Empleado aux) {
+    	addWindowListener(new WindowAdapter() {
+    		@Override
+    		public void windowClosing(WindowEvent e) {
+    			Orange.getInstancia().guardarArchivo();
+    		}
+    	});
     	e = aux;
-        setTitle("orange - sistema de control");
+    	
+        setTitle("Orange - Sistema de Control");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 960, 620);
         setLocationRelativeTo(null);
@@ -55,12 +69,19 @@ public class Principal extends JFrame {
         menuBar.setBorder(BorderFactory.createEmptyBorder(4, 6, 4, 6));
         setJMenuBar(menuBar);
 
-        JMenu mnPersonal = new JMenu("personal");
+        mnPersonal = new JMenu("personal");
         mnPersonal.setForeground(Color.WHITE);
         mnPersonal.setFont(new Font("SansSerif", Font.PLAIN, 13));
         menuBar.add(mnPersonal);
 
         JMenuItem mntmRegPersonal = new JMenuItem("registrar personal");
+        mntmRegPersonal.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		RegUser ru = new RegUser(null);
+        		ru.setModal(true);
+        		ru.setVisible(true);
+        	}
+        });
         mntmRegPersonal.setFont(new Font("SansSerif", Font.PLAIN, 12));
         mnPersonal.add(mntmRegPersonal);
 
@@ -76,7 +97,9 @@ public class Principal extends JFrame {
         JMenuItem mntmRegCliente = new JMenuItem("registrar cliente");
         mntmRegCliente.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		
+        		RegCliente rcl = new RegCliente();
+        		rcl.setModal(true);
+        		rcl.setVisible(true);
         	}
         });
         mntmRegCliente.setFont(new Font("SansSerif", Font.PLAIN, 12));
@@ -86,7 +109,7 @@ public class Principal extends JFrame {
         mntmListClientes.setFont(new Font("SansSerif", Font.PLAIN, 12));
         mnClientes.add(mntmListClientes);
 
-        JMenu mnServicios = new JMenu("planes y servicios");
+        mnServicios = new JMenu("planes y servicios");
         mnServicios.setForeground(Color.WHITE);
         mnServicios.setFont(new Font("SansSerif", Font.PLAIN, 13));
         menuBar.add(mnServicios);
@@ -134,7 +157,7 @@ public class Principal extends JFrame {
         panelHeader.setBorder(new EmptyBorder(18, 28, 18, 28));
         contentPane.add(panelHeader, BorderLayout.NORTH);
 
-        JLabel lblTitulo = new JLabel("orange");
+        JLabel lblTitulo = new JLabel("Orange");
         lblTitulo.setForeground(Color.WHITE);
         lblTitulo.setFont(new Font("SansSerif", Font.BOLD, 32));
         panelHeader.add(lblTitulo, BorderLayout.WEST);
@@ -151,7 +174,7 @@ public class Principal extends JFrame {
         panelCentro.setLayout(new GridLayout(2, 3, 22, 22));
         contentPane.add(panelCentro, BorderLayout.CENTER);
 
-        JButton btnPersonal = crearBotonMenu("personal", "trabajador, comercial y admin", new Color(255, 102, 0));
+        JButton btnPersonal = crearBotonMenu("personal", "Comercial y Administrador", new Color(255, 102, 0));
         JButton btnClientes = crearBotonMenu("clientes", "registro y control de cuentas", new Color(35, 35, 35));
         JButton btnPlanes = crearBotonMenu("planes y servicios", "catalogo de ofertas y lineas", new Color(35, 35, 35));
         JButton btnFacturar = crearBotonMenu("facturacion", "cobros y emision de facturas", new Color(255, 102, 0));
@@ -172,7 +195,11 @@ public class Principal extends JFrame {
         panelFooter.setLayout(new BorderLayout());
         contentPane.add(panelFooter, BorderLayout.SOUTH);
 
-        JLabel lblEstado = new JLabel("estado: sistema activo");
+        JLabel lblEstado = new JLabel("Usuario: -");
+        if(e != null) 
+        {
+        	lblEstado.setText("Usuario: " + e.getUserName());
+        }
         lblEstado.setForeground(new Color(90, 90, 90));
         lblEstado.setFont(new Font("SansSerif", Font.PLAIN, 12));
         panelFooter.add(lblEstado, BorderLayout.WEST);
@@ -218,6 +245,14 @@ public class Principal extends JFrame {
                 mntmRepPeriodo.doClick();
             }
         });
+        
+        if (e instanceof Comercial) 
+        {
+            mnPersonal.setEnabled(false);
+            mnServicios.setEnabled(false);
+            btnPersonal.setEnabled(false);
+            btnPlanes.setEnabled(false);
+        }
     }
     
     private JButton crearBotonMenu(String titulo, String descripcion, Color colorAcento) {

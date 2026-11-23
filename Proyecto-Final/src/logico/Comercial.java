@@ -13,12 +13,12 @@ public class Comercial extends Empleado
 
 	public Comercial(String codigo, String cedula, String nombre, String apellido, String telefono, String direccion,
 			String correo, String userName, String clave, char sexo, float salarioBase, LocalDate fechaIng,
-			float comision, int ventas)
+			float comision)
 	{
 		super(codigo, cedula, nombre, apellido, telefono, direccion, correo, userName, clave, sexo, salarioBase,
 				fechaIng);
 		this.comision = comision;
-		this.ventas = ventas;
+		this.ventas = 0;
 	}
 
 	public float getComision()

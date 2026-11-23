@@ -65,7 +65,8 @@ public class Login extends JFrame {
 						empresa2 = new FileOutputStream("Orange.dat");
 						empresaWrite = new ObjectOutputStream(empresa2);
 						Administrador aux = new Administrador("A-0", "00000000000", "", "", "", "", "", "Administrador", "admin", 'M', 0, LocalDate.now(), "");
-						Orange.getInstancia().regAdmin(aux);
+						Orange.getInstancia().regEmpleado(aux);
+						Orange.generarCodEmp--;
 						empresaWrite.writeObject(Orange.getInstancia());
 						empresa2.close();
 						empresaWrite.close();
@@ -107,7 +108,7 @@ public class Login extends JFrame {
 		panelHeader.setBorder(new EmptyBorder(14, 24, 14, 24));
 		contentPane.add(panelHeader, BorderLayout.NORTH);
 
-		JLabel lblTitulo = new JLabel("orange");
+		JLabel lblTitulo = new JLabel("Orange");
 		lblTitulo.setForeground(Color.WHITE);
 		lblTitulo.setFont(new Font("SansSerif", Font.BOLD, 26));
 		panelHeader.add(lblTitulo, BorderLayout.WEST);
@@ -148,7 +149,7 @@ public class Login extends JFrame {
 		panelCard.add(txtUser);
 		txtUser.setColumns(10);
 
-		JLabel lblClave = new JLabel("contrasena:");
+		JLabel lblClave = new JLabel("contrase\u00F1a:");
 		lblClave.setFont(new Font("SansSerif", Font.BOLD, 13));
 		lblClave.setForeground(oscuroBarra);
 		lblClave.setBounds(20, 80, 110, 28);
@@ -170,7 +171,7 @@ public class Login extends JFrame {
 				String usuario = txtUser.getText().trim();
 				String clave = new String(txtPass.getPassword());
 
-				if (!Validador.campoNoVacio(usuario, "usuario") || !Validador.campoNoVacio(clave, "contraseÃ±a")) {
+				if (!Validador.campoNoVacio(usuario, "usuario") || !Validador.campoNoVacio(clave, "contraseña")) {
 					return;
 				}
 
@@ -188,7 +189,7 @@ public class Login extends JFrame {
 					}
 					dispose();
 				} else {
-					JOptionPane.showMessageDialog(null, "usuario o contraseÃ±a incorrectos", "ERROR", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "usuario o contraseña incorrectos", "ERROR", JOptionPane.ERROR_MESSAGE);
 					txtPass.setText("");
 				}
 			}

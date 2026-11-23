@@ -1,5 +1,8 @@
 package logico;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 import java.util.ArrayList;
@@ -17,7 +20,13 @@ public class Orange implements Serializable
 	private ArrayList<Plan> planes;
 	private ArrayList<Factura> ventas;
 	private static Orange o = null;
+
 	public static final float ITBIS = 0.18f;
+	public static int generarCodCliente = 1;
+	public static int generarCodEmp = 1;
+	public static int generarCodCont = 1;
+	public static int generarCodPlan = 1;
+	public static int generarCodFact = 1;
 
 	private Orange()
 	{
@@ -38,10 +47,15 @@ public class Orange implements Serializable
 
 		return o;
 	}
-	
+
 	public static void setOrange(Orange r) 
 	{
 		o = r;
+		generarCodCliente = Orange.getInstancia().clientes.size() + 1;
+		generarCodEmp = Orange.getInstancia().empleados.size() + 1;
+		generarCodCont = Orange.getInstancia().contratos.size() + 1;
+		generarCodPlan = Orange.getInstancia().planes.size() + 1;
+		generarCodFact = Orange.getInstancia().ventas.size() + 1;
 	}
 
 	public ArrayList<Contrato> getContratos()
@@ -74,6 +88,49 @@ public class Orange implements Serializable
 		this.ventas = ventas;
 	}
 
+	public ArrayList<Cliente> getClientes()
+	{
+		return clientes;
+	}
+
+	public void setClientes(ArrayList<Cliente> clientes)
+	{
+		this.clientes = clientes;
+	}
+
+	public ArrayList<Empleado> getEmpleados()
+	{
+		return empleados;
+	}
+
+	public void setEmpleados(ArrayList<Empleado> empleados)
+	{
+		this.empleados = empleados;
+	}
+
+	public ArrayList<Persona> getUsuarios()
+	{
+		return usuarios;
+	}
+
+	public void setUsuarios(ArrayList<Persona> usuarios)
+	{
+		this.usuarios = usuarios;
+	}
+
+	public void guardarArchivo() 
+	{
+		try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Orange.dat")))
+		{
+			oos.writeObject(Orange.getInstancia());
+			oos.close();
+		}
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
+	}
+
 	public Cliente buscarClienteByEmail(String correo)
 	{
 		for (Cliente c : clientes)
@@ -99,7 +156,7 @@ public class Orange implements Serializable
 
 		return null;
 	}
-	
+
 	public Plan buscarPlanByCod(String cod)
 	{
 		for (Plan p: planes)
@@ -112,7 +169,7 @@ public class Orange implements Serializable
 
 		return null;
 	}
-	
+
 	public Factura buscarFacturaByCod(String cod)
 	{
 		for (Factura f: ventas)
@@ -135,10 +192,10 @@ public class Orange implements Serializable
 				return e;
 			}
 		}
-		
+
 		return null;
 	}
-	
+
 	public Persona buscarUserByNameC(String user)
 	{
 		for (Cliente c: clientes)
@@ -148,10 +205,23 @@ public class Orange implements Serializable
 				return c;
 			}
 		}
-		
+
 		return null;
 	}
 	
+	public boolean usuarioRepetido(String user) 
+	{
+		for (Persona p : usuarios) 
+		{
+			if (p.getUserName().equalsIgnoreCase(user)) 
+			{
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	public Persona loginCorrecto(String user, String clave)
 	{
 		Persona aux = null;
@@ -163,27 +233,40 @@ public class Orange implements Serializable
 			if(u.getUserName().equals(user) && u.getClave().equals(clave)) 
 			{
 				encontrado = true;
-				if(u instanceof Cliente) 
-				{
-					aux = (Cliente) u;
-				}
-				else if(u instanceof Comercial) 
-				{
-					aux = (Comercial) u;
-				}
-				else 
-				{
-					aux = (Administrador) u;
-				}
+				aux = u;
 			}
+			i++;
 		}
-		
+
 		return aux;
 	}
 
-	public void regAdmin(Administrador aux)
+	public void regEmpleado(Empleado aux)
 	{
-		empleados.add(aux);
+		if(aux instanceof Comercial) 
+		{
+			empleados.add((Comercial) aux);
+			usuarios.add((Comercial) aux);
+		}
+		else 
+		{
+			empleados.add((Administrador) aux);
+			usuarios.add((Administrador) aux);
+		}
+
+		generarCodEmp++;
+
+		guardarArchivo();
+	}
+
+	public void regCliente(Cliente nuevo)
+	{
+		clientes.add(nuevo);
+		usuarios.add(nuevo);
+
+		generarCodCliente++;
+
+		guardarArchivo();
 		
 	}
 
