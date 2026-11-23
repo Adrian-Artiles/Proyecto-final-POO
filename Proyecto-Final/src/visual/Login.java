@@ -32,17 +32,13 @@ import java.awt.event.ActionEvent;
 public class Login extends JFrame
 {
 
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 6498829247915543098L;
 	private JPanel contentPane;
 	private JTextField txtUser;
 	private JPasswordField txtPass;
 
-	/**
-	 * Launch the application.
-	 */
+	
 	public static void main(String[] args)
 	{
 		EventQueue.invokeLater(new Runnable()
@@ -88,9 +84,7 @@ public class Login extends JFrame
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
+	
 	public Login()
 	{
 		setTitle("Login");

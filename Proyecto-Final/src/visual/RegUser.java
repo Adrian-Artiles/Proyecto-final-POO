@@ -239,7 +239,7 @@ public class RegUser extends JDialog
 						{
 							if(String.valueOf(txtPass.getPassword().toString()).equals(String.valueOf(txtPassC.getPassword().toString()))) 
 							{
-								if(validador()) 
+								if(Validador()) 
 								{
 									
 								}
@@ -250,6 +250,16 @@ public class RegUser extends JDialog
 								
 							}
 						}
+					}
+
+					private boolean Validador() {
+						// TODO Auto-generated method stub
+						return false;
+					}
+
+					private boolean usuarioRepetido(String text) {
+						// TODO Auto-generated method stub
+						return false;
 					}
 				});
 				btnCrear.setActionCommand("OK");
@@ -269,60 +279,33 @@ public class RegUser extends JDialog
 		}
 	}
 	
-	protected static boolean validador()
-	{
-		return false;
-	}
-
-	public boolean usuarioRepetido(String user) 
-	{
-		Persona u = Orange.getInstancia().buscarUserByNameE(user);
-		
-		return (u != null);
-	}
-
-	public boolean passCorrect(String pass) 
-	{
+	public boolean passCorrect(String pass) {
 		boolean valido = true;
-		if(pass.trim().isEmpty()) 
-		{
+		if (pass == null || pass.trim().isEmpty()) {
 			valido = false;
-		}
-		else if(pass.length() < 8 || pass.length() > 12) 
-		{
+		} else if (pass.length() < 8 || pass.length() > 12) {
 			valido = false;
-		}
-		else 
-		{
+		} else {
 			int i = 0;
 			boolean numero = false;
 			boolean mayuscula = false;
 			boolean minuscula = false;
-			while(i < pass.length()) 
-			{
+			while (i < pass.length() && valido) {
 				char ch = pass.charAt(i);
 
-				if(Character.isDigit(ch)) 
-				{
+				if (Character.isDigit(ch)) {
 					numero = true;
-				}
-				else if(Character.isUpperCase(ch))
-				{
+				} else if (Character.isUpperCase(ch)) {
 					mayuscula = true;
-				}
-				else if(Character.isLowerCase(ch)) 
-				{
+				} else if (Character.isLowerCase(ch)) {
 					minuscula = true;
-				}
-				else if(Character.isWhitespace(ch))
-				{
+				} else if (Character.isWhitespace(ch)) {
 					valido = false;
-					break;
 				}
+				i++;
 			}
 
-			if(!numero || !mayuscula || !minuscula) 
-			{
+			if (!numero || !mayuscula || !minuscula) {
 				valido = false;
 			}
 		}
