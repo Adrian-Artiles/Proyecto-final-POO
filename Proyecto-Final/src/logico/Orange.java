@@ -294,4 +294,13 @@ public class Orange implements Serializable
 		
 	}
 
+	public void regPlan(Plan p)
+	{
+		planes.add(p);
+		
+		generarCodPlan++;
+
+		guardarArchivo();
+	}
+
 }
