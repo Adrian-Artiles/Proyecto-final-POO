@@ -30,4 +30,12 @@ public class InternetHogar extends Servicio {
         this.velocidadBajada = velocidadBajada;
     }
 
+	@Override
+	public String toString()
+	{
+		return "Velocidad: " + velocidadSubida + "/" + velocidadBajada + " MBps " + "(RD$ " + precio + ")";
+	}
+    
+    
+
 }

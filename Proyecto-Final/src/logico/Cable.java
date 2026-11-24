@@ -35,5 +35,11 @@ public class Cable extends Servicio
 	{
 		this.hd = hd;
 	}
+
+	@Override
+	public String toString()
+	{
+		return cantCanales + " canales disponibles " + (hd ? "Incluyendo la definicion HD" : "") + "(RD$ " + precio + ")";
+	}
 	
 }

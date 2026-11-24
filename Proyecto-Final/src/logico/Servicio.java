@@ -30,4 +30,11 @@ public abstract class Servicio implements Serializable{
     public void setPrecio(float precio) {
         this.precio = precio;
     }
+
+	@Override
+	public String toString()
+	{
+		return "Servicio [codigo=" + codigo + ", precio=" + precio + "]";
+	}
+    
 }

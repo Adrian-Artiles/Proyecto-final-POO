@@ -29,4 +29,12 @@ public class Telefono extends Servicio {
     public void setDatos(int datos) {
         this.datos = datos;
     }
+
+	@Override
+	public String toString()
+	{
+		return minutosLlamada + " minutos más " + datos + "GB para el Telefono " + "(RD$ " + precio + ")";
+	}
+    
+    
 }

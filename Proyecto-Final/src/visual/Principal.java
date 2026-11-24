@@ -115,10 +115,24 @@ public class Principal extends JFrame {
         menuBar.add(mnServicios);
 
         JMenuItem mntmRegServicio = new JMenuItem("nuevo servicio");
+        mntmRegServicio.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		RegServicio rs = new RegServicio();
+        		rs.setModal(true);
+        		rs.setVisible(true);
+        	}
+        });
         mntmRegServicio.setFont(new Font("SansSerif", Font.PLAIN, 12));
         mnServicios.add(mntmRegServicio);
 
         JMenuItem mntmRegPlan = new JMenuItem("crear plan");
+        mntmRegPlan.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		RegPlan rp = new RegPlan();
+        		rp.setModal(true);
+        		rp.setVisible(true);
+        	}
+        });
         mntmRegPlan.setFont(new Font("SansSerif", Font.PLAIN, 12));
         mnServicios.add(mntmRegPlan);
 
