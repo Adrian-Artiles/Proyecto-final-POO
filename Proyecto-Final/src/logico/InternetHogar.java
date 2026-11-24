@@ -7,13 +7,11 @@ public class InternetHogar extends Servicio {
 	private static final long serialVersionUID = -7723183833292069825L;
 	private int velocidadSubida;
     private int velocidadBajada;
-    private String direccion;
 
-    public InternetHogar(String codigo, float precio, int velocidadSubida, int velocidadBajada, String direccion) {
+    public InternetHogar(String codigo, float precio, int velocidadSubida, int velocidadBajada) {
         super(codigo, precio);
         this.velocidadSubida = velocidadSubida;
         this.velocidadBajada = velocidadBajada;
-        this.direccion = direccion;
     }
 
     public int getVelocidadSubida() {
@@ -32,14 +30,4 @@ public class InternetHogar extends Servicio {
         this.velocidadBajada = velocidadBajada;
     }
 
-	public String getDireccion()
-	{
-		return direccion;
-	}
-
-	public void setDireccion(String direccion)
-	{
-		this.direccion = direccion;
-	}
-    
 }

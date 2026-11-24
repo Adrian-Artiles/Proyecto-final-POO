@@ -17,6 +17,7 @@ public class Orange implements Serializable
 	private ArrayList<Empleado> empleados;
 	private ArrayList<Persona> usuarios;
 	private ArrayList<Contrato> contratos;
+	ArrayList<Servicio> servicios;
 	private ArrayList<Plan> planes;
 	private ArrayList<Factura> ventas;
 	private static Orange o = null;
@@ -25,6 +26,7 @@ public class Orange implements Serializable
 	public static int generarCodCliente = 1;
 	public static int generarCodEmp = 1;
 	public static int generarCodCont = 1;
+	public static int generarCodServ = 1;
 	public static int generarCodPlan = 1;
 	public static int generarCodFact = 1;
 
@@ -36,6 +38,7 @@ public class Orange implements Serializable
 		this.planes = new ArrayList<>();
 		this.ventas = new ArrayList<>();
 		this.usuarios = new ArrayList<>();
+		this.servicios = new ArrayList<>();
 	}
 
 	public static Orange getInstancia() 
@@ -54,6 +57,7 @@ public class Orange implements Serializable
 		generarCodCliente = Orange.getInstancia().clientes.size() + 1;
 		generarCodEmp = Orange.getInstancia().empleados.size() + 1;
 		generarCodCont = Orange.getInstancia().contratos.size() + 1;
+		generarCodServ = Orange.getInstancia().servicios.size() + 1;
 		generarCodPlan = Orange.getInstancia().planes.size() + 1;
 		generarCodFact = Orange.getInstancia().ventas.size() + 1;
 	}
@@ -116,6 +120,16 @@ public class Orange implements Serializable
 	public void setUsuarios(ArrayList<Persona> usuarios)
 	{
 		this.usuarios = usuarios;
+	}
+
+	public ArrayList<Servicio> getServicios()
+	{
+		return servicios;
+	}
+
+	public void setServicios(ArrayList<Servicio> servicios)
+	{
+		this.servicios = servicios;
 	}
 
 	public void guardarArchivo() 
@@ -265,6 +279,16 @@ public class Orange implements Serializable
 		usuarios.add(nuevo);
 
 		generarCodCliente++;
+
+		guardarArchivo();
+		
+	}
+
+	public void regServicio(Servicio s)
+	{
+		servicios.add(s);
+
+		generarCodServ++;
 
 		guardarArchivo();
 		
