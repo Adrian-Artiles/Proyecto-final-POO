@@ -76,7 +76,8 @@ public class Principal extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				RegUser ru = new RegUser(null);
 				ru.setModal(true);
-				ru.setVisible(true);
+				
+ru.setVisible(true);
 			}
 		});
 		mntmRegPersonal.setFont(new Font("SansSerif", Font.PLAIN, 12));
