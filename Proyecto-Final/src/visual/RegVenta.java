@@ -12,11 +12,15 @@ import java.awt.GridLayout;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.border.TitledBorder;
 
 import logico.Cliente;
+import logico.Contrato;
 import logico.Empleado;
+import logico.Factura;
 import logico.Orange;
 import logico.Plan;
 
@@ -39,6 +43,7 @@ public class RegVenta extends JDialog
 	private JTextField txtTotal;
 	private JSpinner spnPlazo;
 	private Empleado e;
+	private DateTimeFormatter formato;
 
 	/**
 	 * Launch the application.
@@ -64,7 +69,9 @@ public class RegVenta extends JDialog
 		e = aux;
 		setTitle("Contratar un Plan");
 		setBounds(100, 100, 648, 408);
+		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
+		formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new BorderLayout(0, 0));
@@ -94,7 +101,8 @@ public class RegVenta extends JDialog
 			lblCuotaMensual.setBounds(12, 99, 109, 30);
 			panel.add(lblCuotaMensual);
 
-			txtCod = new JTextField();
+			txtCod =  new JTextField();
+			txtCod.setText("CT-" + (Orange.generarCodCont < 10 ? "00" :  Orange.generarCodCont < 100 ? "0" : "") + Orange.generarCodCont);
 			txtCod.setEditable(false);
 			txtCod.setBounds(133, 13, 116, 30);
 			panel.add(txtCod);
@@ -153,7 +161,17 @@ public class RegVenta extends JDialog
 				cbxCliente.addItem("<<SELECCIONE>>"); 
 				cbxCliente.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						cbxPlan.setEnabled(cbxCliente.getSelectedIndex() > 0);
+						if(cbxCliente.getSelectedIndex() > 0) 
+						{
+							cbxPlan.setEnabled(true);
+							llenarPlan((Cliente)(cbxCliente.getSelectedItem()));
+						}
+						else 
+						{
+							cbxPlan.setEnabled(false);
+							cbxPlan.removeAllItems();
+							cbxPlan.addItem("<<SELECCIONE>>");
+						}
 					}
 				});
 				panel.add(cbxCliente);
@@ -194,6 +212,20 @@ public class RegVenta extends JDialog
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("generar contrato y facturas");
+				okButton.setEnabled(false);
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+
+						Contrato nuevo = new Contrato(txtCod.getText(),(Cliente) (cbxCliente.getSelectedItem()), 
+								LocalDate.parse(txtFInicio.getText(), formato), LocalDate.parse(txtFFinal.getText(), formato), 
+								Float.parseFloat(txtMensual.getText()), (Plan) cbxPlan.getSelectedItem(), genFact());
+
+						((Cliente) cbxCliente.getSelectedItem()).agregarContrato(nuevo);
+
+						Orange.getInstancia().regContrato(nuevo);
+
+					}
+				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
@@ -212,12 +244,60 @@ public class RegVenta extends JDialog
 		llenarCampos();
 	}
 
+	protected void llenarPlan(Cliente c)
+	{
+		cbxPlan.removeAllItems();
+		cbxPlan.addItem("<<SELECCIONADO>>"); 
+
+
+		for(Plan p: Orange.getInstancia().getPlanes()) 
+		{
+			boolean encontrado = false;
+			int i = 0;
+
+			while (i < c.getContratos().size() && !encontrado) 
+			{
+				if (c.getContratos().get(i).getPlan().getCodigo().equals(p.getCodigo())) 
+				{
+					encontrado = true;
+				}
+				i++;
+			}
+
+			if(!encontrado) 
+			{
+				cbxPlan.addItem(p);
+			}
+		}
+
+		if(cbxPlan.getItemCount() < 2) 
+		{
+			cbxPlan.setEnabled(false);
+		}
+	}
+
+	protected ArrayList<Factura> genFact()
+	{
+		ArrayList<Factura> f = new ArrayList<>();
+		int lim = Integer.parseInt(spnPlazo.getValue().toString());
+
+		for(int i = 0; i < lim; i++) 
+		{
+			Factura nueva = new Factura("F", ((Plan) cbxPlan.getSelectedItem()), 
+					LocalDate.now().plusMonths(i + 1), ((Plan) cbxPlan.getSelectedItem()).getPrecio());
+
+			f.add(nueva);
+		}
+
+		return f;
+	}
+
 	protected void calcularPrecio()
 	{
 		float precio = ((Plan) cbxPlan.getSelectedItem()).getPrecio();
 		float impuesto = precio * Orange.ITBIS;
 		int meses = Integer.parseInt(spnPlazo.getValue().toString());
-		
+
 		txtMensual.setText(String.format(java.util.Locale.US, "%.2f", precio + impuesto));
 		txtTotal.setText(String.format(java.util.Locale.US, "%.2f", (precio + impuesto) * meses));
 		txtFFinal.setText(LocalDate.now().plusMonths(meses).toString());
@@ -225,7 +305,7 @@ public class RegVenta extends JDialog
 
 	private void llenarCampos() 
 	{
-     	for(Cliente c: Orange.getInstancia().getClientes()) 
+		for(Cliente c: Orange.getInstancia().getClientes()) 
 		{
 			if(!c.isDeudor()) 
 			{
@@ -233,12 +313,7 @@ public class RegVenta extends JDialog
 			}
 		}
 
-		for(Plan p: Orange.getInstancia().getPlanes()) 
-		{
-			cbxPlan.addItem(p); 
-		}
-		
-		txtFInicio.setText(LocalDate.now().toString());
-		txtFFinal.setText(LocalDate.now().plusMonths(Integer.parseInt(spnPlazo.getValue().toString())).toString());
+		txtFInicio.setText(LocalDate.now().format(formato));
+		txtFFinal.setText(LocalDate.now().plusMonths(Integer.parseInt(spnPlazo.getValue().toString())).format(formato));
 	}
 }

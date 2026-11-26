@@ -1,5 +1,6 @@
 package logico;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -7,22 +8,24 @@ public class Contrato
 {
 	private String codigo;
 	private Cliente cliente;
-	private Date fecha;
+	private LocalDate fechaIng;
+	private LocalDate fechaFin;
 	private float precioMensual;
 	private boolean activo;
 	private Plan plan;
-	private ArrayList<Factura> pagos;
-	
-	public Contrato(String codigo, Cliente cliente, Date fecha, float precioMensual, boolean activo, Plan plan,
-			ArrayList<Factura> pagos)
+	private ArrayList<Factura> facturas;
+
+	public Contrato(String codigo, Cliente cliente, LocalDate fechaIng, LocalDate fechaFin, float precioMensual,
+			Plan plan, ArrayList<Factura> pagos)
 	{
 		this.codigo = codigo;
 		this.cliente = cliente;
-		this.fecha = fecha;
+		this.fechaIng = fechaIng;
+		this.fechaFin = fechaFin;
 		this.precioMensual = precioMensual;
-		this.activo = activo;
+		this.activo = true;
 		this.plan = plan;
-		this.pagos = pagos;
+		this.facturas = pagos;
 	}
 
 	public String getCodigo()
@@ -45,14 +48,24 @@ public class Contrato
 		this.cliente = cliente;
 	}
 
-	public Date getFecha()
+	public LocalDate getFechaIng()
 	{
-		return fecha;
+		return fechaIng;
 	}
 
-	public void setFecha(Date fecha)
+	public void setFechaIng(LocalDate fechaIng)
 	{
-		this.fecha = fecha;
+		this.fechaIng = fechaIng;
+	}
+
+	public LocalDate getFechaFin()
+	{
+		return fechaFin;
+	}
+
+	public void setFechaFin(LocalDate fechaFin)
+	{
+		this.fechaFin = fechaFin;
 	}
 
 	public float getPrecioMensual()
@@ -85,14 +98,14 @@ public class Contrato
 		this.plan = plan;
 	}
 
-	public ArrayList<Factura> getPagos()
+	public ArrayList<Factura> getFacturas()
 	{
-		return pagos;
+		return facturas;
 	}
 
-	public void setPagos(ArrayList<Factura> pagos)
+	public void setFacturas(ArrayList<Factura> facturas)
 	{
-		this.pagos = pagos;
+		this.facturas = facturas;
 	}
 
 }

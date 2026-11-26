@@ -44,4 +44,9 @@ public class Cliente extends Persona
 		return contratos.contains(p);
 	}
 
+	public void agregarContrato(Contrato nuevo)
+	{
+		contratos.add(nuevo);
+	}
+
 }
