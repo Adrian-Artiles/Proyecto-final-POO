@@ -312,4 +312,13 @@ public class Orange implements Serializable
 		guardarArchivo();
 	}
 
+	public void regFactura(Factura ft)
+	{
+		ventas.add(ft);
+		
+		generarCodFact++;
+		
+		guardarArchivo();
+	}
+
 }

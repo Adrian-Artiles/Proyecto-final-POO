@@ -336,7 +336,7 @@ public class RegCliente extends JDialog {
 
 		for (Cliente c : Orange.getInstancia().getClientes()) 
 		{
-			modeloLista.addElement(c.getCodigo() + " - " + c.getNombre() + " " + c.getApellido() + " (" + c.getCedula() + ")");
+			modeloLista.addElement(c.toString());
 		}
 
 	}

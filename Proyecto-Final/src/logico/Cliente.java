@@ -49,4 +49,10 @@ public class Cliente extends Persona
 		contratos.add(nuevo);
 	}
 
+	@Override
+	public String toString()
+	{
+		return codigo + " - " + nombre + " " + apellido + " (" + cedula + ")";
+	}
+
 }

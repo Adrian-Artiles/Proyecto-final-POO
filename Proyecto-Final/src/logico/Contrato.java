@@ -1,11 +1,16 @@
 package logico;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Contrato
+public class Contrato implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5027188198966103904L;
 	private String codigo;
 	private Cliente cliente;
 	private LocalDate fechaIng;

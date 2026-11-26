@@ -72,7 +72,7 @@ public class RegServicio extends JDialog {
 	public RegServicio() {
 		setResizable(false);
 		setTitle("Orange - Registrar Servicio");
-		setBounds(100, 100, 560, 540);
+		setBounds(100, 100, 540, 540);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 
@@ -158,29 +158,29 @@ public class RegServicio extends JDialog {
 
 		JLabel lblCodigo = new JLabel("codigo:");
 		lblCodigo.setFont(new Font("SansSerif", Font.BOLD, 13));
-		lblCodigo.setBounds(16, 16, 175, 25);
+		lblCodigo.setBounds(16, 16, 203, 25);
 		panelDatos.add(lblCodigo);
 
 		JLabel lblPrecio = new JLabel("precio (RD$):");
 		lblPrecio.setFont(new Font("SansSerif", Font.BOLD, 13));
-		lblPrecio.setBounds(16, 48, 175, 25);
+		lblPrecio.setBounds(16, 48, 203, 25);
 		panelDatos.add(lblPrecio);
 
 		lblExtra1 = new JLabel("minutos de llamada:");
 		lblExtra1.setFont(new Font("SansSerif", Font.BOLD, 13));
-		lblExtra1.setBounds(16, 80, 175, 25);
+		lblExtra1.setBounds(16, 80, 203, 25);
 		panelDatos.add(lblExtra1);
 
 		lblExtra2 = new JLabel("datos (en GB):");
 		lblExtra2.setFont(new Font("SansSerif", Font.BOLD, 13));
-		lblExtra2.setBounds(16, 112, 175, 25);
+		lblExtra2.setBounds(16, 112, 203, 25);
 		panelDatos.add(lblExtra2);
 
 		txtCod = new JTextField();
 		txtCod.setEditable(false);
 		txtCod.setBackground(new Color(235, 237, 240));
 		txtCod.setFont(new Font("SansSerif", Font.BOLD, 13));
-		txtCod.setBounds(205, 16, 240, 25);
+		txtCod.setBounds(231, 16, 240, 25);
 		panelDatos.add(txtCod);
 		txtCod.setColumns(10);
 
@@ -195,19 +195,19 @@ public class RegServicio extends JDialog {
 		ftxtPrecio = new JFormattedTextField(formatear);
 		ftxtPrecio.setFont(new Font("SansSerif", Font.PLAIN, 13));
 		ftxtPrecio.setValue(0.0f);
-		ftxtPrecio.setBounds(205, 48, 240, 25);
+		ftxtPrecio.setBounds(231, 48, 240, 25);
 		panelDatos.add(ftxtPrecio);
 
 		spinner1 = new JSpinner();
 		spinner1.setFont(new Font("SansSerif", Font.PLAIN, 13));
 		spinner1.setModel(new SpinnerNumberModel(0, 0, null, 1));
-		spinner1.setBounds(205, 80, 240, 25);
+		spinner1.setBounds(231, 80, 240, 25);
 		panelDatos.add(spinner1);
 
 		spinner2 = new JSpinner();
 		spinner2.setFont(new Font("SansSerif", Font.PLAIN, 13));
 		spinner2.setModel(new SpinnerNumberModel(0, 0, null, 1));
-		spinner2.setBounds(205, 112, 240, 25);
+		spinner2.setBounds(231, 112, 240, 25);
 		panelDatos.add(spinner2);
 
 		rdbtnHD = new JRadioButton("incluir HD");
