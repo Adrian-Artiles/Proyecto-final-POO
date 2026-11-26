@@ -25,12 +25,15 @@ import javax.swing.border.EmptyBorder;
 import logico.Comercial;
 import logico.Empleado;
 import logico.Orange;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.Cursor;
 
 public class Principal extends JFrame {
 
 	private static final long serialVersionUID = -2338171001859749383L;
 	private JPanel contentPane;
-	private Empleado e;
+	private Empleado emp;
 	private JMenu mnPersonal;
 	private JMenu mnServicios;
 
@@ -54,7 +57,7 @@ public class Principal extends JFrame {
 				Orange.getInstancia().guardarArchivo();
 			}
 		});
-		e = aux;
+		emp = aux;
 
 		setTitle("Orange - Sistema de Control");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -76,8 +79,8 @@ public class Principal extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				RegUser ru = new RegUser(null);
 				ru.setModal(true);
-				
-ru.setVisible(true);
+
+				ru.setVisible(true);
 			}
 		});
 		mntmRegPersonal.setFont(new Font("SansSerif", Font.PLAIN, 12));
@@ -176,6 +179,13 @@ ru.setVisible(true);
 		menuBar.add(mnVentas);
 
 		JMenuItem mntmNuevaVenta = new JMenuItem("realizar venta");
+		mntmNuevaVenta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RegVenta rg = new RegVenta(emp);
+				rg.setModal(true);
+				rg.setVisible(true);
+			}
+		});
 		mntmNuevaVenta.setFont(new Font("SansSerif", Font.PLAIN, 12));
 		mnVentas.add(mntmNuevaVenta);
 
@@ -240,16 +250,25 @@ ru.setVisible(true);
 		contentPane.add(panelFooter, BorderLayout.SOUTH);
 
 		JLabel lblEstado = new JLabel("Usuario: -");
-		if (e != null) {
-			lblEstado.setText("Usuario: " + e.getUserName());
+		if (emp != null) {
+			lblEstado.setText("Usuario: " + emp.getUserName());
 		}
 		lblEstado.setForeground(new Color(90, 90, 90));
 		lblEstado.setFont(new Font("SansSerif", Font.PLAIN, 12));
 		panelFooter.add(lblEstado, BorderLayout.WEST);
 
-		JLabel lblVersion = new JLabel("proyecto 7 - orange");
+		JLabel lblVersion = new JLabel("CERRAR SESION");
+		lblVersion.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		lblVersion.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				Login l = new Login();
+				l.setVisible(true);
+				dispose();
+			}
+		});
 		lblVersion.setForeground(new Color(90, 90, 90));
-		lblVersion.setFont(new Font("SansSerif", Font.PLAIN, 12));
+		lblVersion.setFont(new Font("SansSerif", Font.BOLD, 13));
 		lblVersion.setHorizontalAlignment(SwingConstants.RIGHT);
 		panelFooter.add(lblVersion, BorderLayout.EAST);
 
@@ -289,7 +308,7 @@ ru.setVisible(true);
 			}
 		});
 
-		if (e instanceof Comercial) {
+		if (emp instanceof Comercial) {
 			mnPersonal.setEnabled(false);
 			mnServicios.setEnabled(false);
 			btnPersonal.setEnabled(false);
@@ -308,8 +327,8 @@ ru.setVisible(true);
 				BorderFactory.createCompoundBorder(
 						BorderFactory.createLineBorder(new Color(220, 223, 228), 1),
 						new EmptyBorder(14, 18, 14, 18)
-				)
-		));
+						)
+				));
 		return btn;
 	}
 }

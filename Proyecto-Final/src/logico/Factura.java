@@ -9,12 +9,14 @@ public class Factura implements Serializable {
 	 */
 	private static final long serialVersionUID = -6184703847509367981L;
 	private String codigo;
-    private float total, itbis;
+    private float precio, itbis, total;
     private Plan plan;
     private Date fecha;
+    private boolean pagada;
 
-    public Factura(String codigo, Plan plan, Date fecha) {
+    public Factura(String codigo, Plan plan, Date fecha, float precio) {
         this.codigo = codigo;
+        this.precio = precio;
         this.itbis = calcularItbis();
         this.total = calcularTotal();
         this.plan = plan;

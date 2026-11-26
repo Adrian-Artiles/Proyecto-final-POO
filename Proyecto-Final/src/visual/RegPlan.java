@@ -136,35 +136,35 @@ public class RegPlan extends JDialog {
 
 		JLabel lblTel = new JLabel("servicios de telefono:");
 		lblTel.setFont(new Font("SansSerif", Font.BOLD, 13));
-		lblTel.setBounds(14, 12, 460, 22);
+		lblTel.setBounds(12, 36, 460, 22);
 		panelServicios.add(lblTel);
 
 		cbxTel = new JComboBox<>();
 		cbxTel.setBackground(Color.WHITE);
 		cbxTel.setFont(new Font("SansSerif", Font.PLAIN, 13));
-		cbxTel.setBounds(14, 36, 485, 28);
+		cbxTel.setBounds(12, 60, 485, 28);
 		panelServicios.add(cbxTel);
 
 		JLabel lblHogar = new JLabel("servicios de internet hogar:");
 		lblHogar.setFont(new Font("SansSerif", Font.BOLD, 13));
-		lblHogar.setBounds(14, 72, 460, 22);
+		lblHogar.setBounds(12, 96, 460, 22);
 		panelServicios.add(lblHogar);
 
 		cbxHogar = new JComboBox<>();
 		cbxHogar.setBackground(Color.WHITE);
 		cbxHogar.setFont(new Font("SansSerif", Font.PLAIN, 13));
-		cbxHogar.setBounds(14, 96, 485, 28);
+		cbxHogar.setBounds(12, 120, 485, 28);
 		panelServicios.add(cbxHogar);
 
 		JLabel lblCable = new JLabel("servicios de cable:");
 		lblCable.setFont(new Font("SansSerif", Font.BOLD, 13));
-		lblCable.setBounds(14, 132, 460, 22);
+		lblCable.setBounds(12, 156, 460, 22);
 		panelServicios.add(lblCable);
 
 		cbxCable = new JComboBox<>();
 		cbxCable.setBackground(Color.WHITE);
 		cbxCable.setFont(new Font("SansSerif", Font.PLAIN, 13));
-		cbxCable.setBounds(14, 156, 485, 28);
+		cbxCable.setBounds(12, 180, 485, 28);
 		panelServicios.add(cbxCable);
 
 		JLabel lblSuma = new JLabel("total plan (RD$):");
