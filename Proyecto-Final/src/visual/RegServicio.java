@@ -119,6 +119,7 @@ public class RegServicio extends JDialog {
 		rdbtnTel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				actualizarDatos();
+				
 			}
 		});
 		rdbtnTel.setSelected(true);
