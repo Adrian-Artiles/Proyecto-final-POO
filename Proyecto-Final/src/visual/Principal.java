@@ -2,12 +2,15 @@ package visual;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -26,9 +29,6 @@ import javax.swing.border.EmptyBorder;
 import logico.Comercial;
 import logico.Empleado;
 import logico.Orange;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.Cursor;
 
 public class Principal extends JFrame {
 
@@ -62,7 +62,7 @@ public class Principal extends JFrame {
 
 		setTitle("Orange - Sistema de Control");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 960, 620);
+		setBounds(100, 100, 960, 660);
 		setLocationRelativeTo(null);
 
 		JMenuBar menuBar = new JMenuBar();
@@ -197,6 +197,22 @@ public class Principal extends JFrame {
 		mntmNuevaVenta.setFont(new Font("SansSerif", Font.PLAIN, 12));
 		mnVentas.add(mntmNuevaVenta);
 
+		JMenuItem mntmPagarFactura = new JMenuItem("pagar facturas");
+		mntmPagarFactura.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RegPago rpago = new RegPago();
+				if (rpago.hayClientesPorPagar()) {
+					rpago.setModal(true);
+					rpago.setVisible(true);
+				} else {
+					rpago.dispose();
+					JOptionPane.showMessageDialog(null, "No hay clientes con facturas pendientes por pagar", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+				}
+			}
+		});
+		mntmPagarFactura.setFont(new Font("SansSerif", Font.PLAIN, 12));
+		mnVentas.add(mntmPagarFactura);
+
 		JMenu mnReportes = new JMenu("reportes");
 		mnReportes.setForeground(Color.WHITE);
 		mnReportes.setFont(new Font("SansSerif", Font.PLAIN, 13));
@@ -214,7 +230,7 @@ public class Principal extends JFrame {
 
 		JPanel panelHeader = new JPanel();
 		panelHeader.setBackground(new Color(255, 102, 0));
-		panelHeader.setPreferredSize(new Dimension(960, 110));
+		panelHeader.setPreferredSize(new Dimension(960, 105));
 		panelHeader.setLayout(new BorderLayout());
 		panelHeader.setBorder(new EmptyBorder(18, 28, 18, 28));
 		contentPane.add(panelHeader, BorderLayout.NORTH);
@@ -232,8 +248,8 @@ public class Principal extends JFrame {
 
 		JPanel panelCentro = new JPanel();
 		panelCentro.setBackground(new Color(245, 246, 248));
-		panelCentro.setBorder(new EmptyBorder(35, 45, 35, 45));
-		panelCentro.setLayout(new GridLayout(2, 3, 22, 22));
+		panelCentro.setBorder(new EmptyBorder(24, 45, 24, 45));
+		panelCentro.setLayout(new GridLayout(3, 3, 18, 18));
 		contentPane.add(panelCentro, BorderLayout.CENTER);
 
 		JButton btnPersonal = crearBotonMenu("personal", "Comercial y Administrador", new Color(255, 102, 0));
@@ -242,6 +258,9 @@ public class Principal extends JFrame {
 		JButton btnVentas = crearBotonMenu("realizar venta", "contratos y emision de facturas", new Color(255, 102, 0));
 		JButton btnConsultas = crearBotonMenu("consultas", "busqueda rapida y estados", new Color(35, 35, 35));
 		JButton btnReportes = crearBotonMenu("reportes", "graficas y estadisticas", new Color(35, 35, 35));
+		JButton btnPagarFactura = crearBotonMenu("pagar facturas", "cobro de cuotas y contratos", new Color(255, 102, 0));
+		JButton btnConsultarClientes = crearBotonMenu("consultar clientes", "listado y registro de clientes", new Color(35, 35, 35));
+		JButton btnCatalogoPlanes = crearBotonMenu("listado de planes", "consultar planes y servicios", new Color(35, 35, 35));
 
 		panelCentro.add(btnPersonal);
 		panelCentro.add(btnClientes);
@@ -249,6 +268,9 @@ public class Principal extends JFrame {
 		panelCentro.add(btnVentas);
 		panelCentro.add(btnConsultas);
 		panelCentro.add(btnReportes);
+		panelCentro.add(btnPagarFactura);
+		panelCentro.add(btnConsultarClientes);
+		panelCentro.add(btnCatalogoPlanes);
 
 		JPanel panelFooter = new JPanel();
 		panelFooter.setBackground(new Color(235, 237, 240));
@@ -316,11 +338,30 @@ public class Principal extends JFrame {
 			}
 		});
 
+		btnPagarFactura.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mntmPagarFactura.doClick();
+			}
+		});
+
+		btnConsultarClientes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mntmListClientes.doClick();
+			}
+		});
+
+		btnCatalogoPlanes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mntmListPlanes.doClick();
+			}
+		});
+
 		if (emp instanceof Comercial) {
 			mnPersonal.setEnabled(false);
 			mnServicios.setEnabled(false);
 			btnPersonal.setEnabled(false);
 			btnPlanes.setEnabled(false);
+			btnCatalogoPlanes.setEnabled(false);
 		}
 	}
 
@@ -334,7 +375,7 @@ public class Principal extends JFrame {
 				BorderFactory.createMatteBorder(0, 5, 0, 0, colorAcento),
 				BorderFactory.createCompoundBorder(
 						BorderFactory.createLineBorder(new Color(220, 223, 228), 1),
-						new EmptyBorder(14, 18, 14, 18)
+						new EmptyBorder(12, 16, 12, 16)
 						)
 				));
 		return btn;
