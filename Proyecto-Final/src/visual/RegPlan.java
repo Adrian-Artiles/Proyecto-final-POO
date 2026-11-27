@@ -301,7 +301,8 @@ public class RegPlan extends JDialog {
 		if (!Validador.campoNoVacio(txtNombre.getText().trim(), "nombre del plan")) {
 			return false;
 		}
-		if (serviciosSeleccionados().isEmpty()) {
+		else if (serviciosSeleccionados().isEmpty()) 
+		{
 			JOptionPane.showMessageDialog(null, "debe seleccionar al menos un servicio para el plan", "ERROR", JOptionPane.ERROR_MESSAGE);
 			return false;
 		}

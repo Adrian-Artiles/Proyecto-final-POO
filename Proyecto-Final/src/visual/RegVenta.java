@@ -20,6 +20,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.border.TitledBorder;
 
 import logico.Cliente;
+import logico.Comercial;
 import logico.Contrato;
 import logico.Empleado;
 import logico.Factura;
@@ -44,7 +45,7 @@ public class RegVenta extends JDialog
 	private JTextField txtMensual;
 	private JTextField txtTotal;
 	private JSpinner spnPlazo;
-	private Empleado e;
+	private Empleado emp = null;
 	private DateTimeFormatter formato;
 	private JButton btnGen;
 
@@ -69,7 +70,7 @@ public class RegVenta extends JDialog
 	 */
 	public RegVenta(Empleado aux)
 	{
-		e = aux;
+		emp = aux;
 		setTitle("Contratar un Plan");
 		setBounds(100, 100, 648, 408);
 		setLocationRelativeTo(null);
@@ -231,6 +232,11 @@ public class RegVenta extends JDialog
 
 						((Cliente) cbxCliente.getSelectedItem()).agregarContrato(nuevo);
 
+						if(emp instanceof Comercial) 
+						{
+							((Comercial) emp).setVentas(((Comercial) emp).getVentas() + 1);
+						}
+
 						Orange.getInstancia().regContrato(nuevo);
 
 						JOptionPane.showMessageDialog(null, "Contrato y facturas generados con éxito.", "Información", JOptionPane.INFORMATION_MESSAGE);
@@ -274,25 +280,13 @@ public class RegVenta extends JDialog
 
 		for(Plan p: Orange.getInstancia().getPlanes()) 
 		{
-			boolean encontrado = false;
-			int i = 0;
-
-			while (i < c.getContratos().size() && !encontrado) 
-			{
-				if (c.getContratos().get(i).getPlan().getCodigo().equals(p.getCodigo())) 
-				{
-					encontrado = true;
-				}
-				i++;
-			}
-
-			if(!encontrado) 
+			if(!c.planContratado(p)) 
 			{
 				cbxPlan.addItem(p);
 			}
 		}
 
-		if(cbxPlan.getItemCount() < 2) 
+		if (cbxPlan.getItemCount() < 2) 
 		{
 			cbxPlan.setEnabled(false);
 		}

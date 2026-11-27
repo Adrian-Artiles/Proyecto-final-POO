@@ -112,5 +112,44 @@ public class Contrato implements Serializable
 	{
 		this.facturas = facturas;
 	}
+	
+	public boolean pagoCompleto() 
+	{
+		boolean encontrado = false;
+		int i = 0;
+		while(i < facturas.size() && !encontrado) 
+		{
+			if(!facturas.get(i).isPagada()) 
+			{
+				encontrado = true;
+			}
+			i++;
+		}
+		
+		return !encontrado;
+	}
+	
+	public int facturasVencidas() 
+	{
+		int vencidas = 0;
+		LocalDate hoy = LocalDate.now();
+
+		for (Factura f : facturas) 
+		{
+			if (!f.isPagada() && f.getFecha().isBefore(hoy)) 
+			{
+				vencidas++;
+			}
+		}
+
+		return vencidas;
+	}
+	
+	public boolean verificarContrato() 
+	{
+		activo = facturasVencidas() >= 3 ? false : activo;
+
+		return activo;
+	}
 
 }

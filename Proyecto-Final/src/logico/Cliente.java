@@ -41,7 +41,19 @@ public class Cliente extends Persona
 	
 	public boolean planContratado(Plan p) 
 	{
-		return contratos.contains(p);
+		boolean encontrado = false;
+		int i = 0;
+
+		while (i < contratos.size() && !encontrado) 
+		{
+			if (contratos.get(i).getPlan().getCodigo().equals(p.getCodigo())) 
+			{
+				encontrado = true;
+			}
+			i++;
+		}
+
+		return encontrado;
 	}
 
 	public void agregarContrato(Contrato nuevo)
@@ -53,6 +65,19 @@ public class Cliente extends Persona
 	public String toString()
 	{
 		return codigo + " - " + nombre + " " + apellido + " (" + cedula + ")";
+	}
+	
+	public boolean clientePago() 
+	{
+		for(Contrato ct: contratos) 
+		{
+			if(!ct.pagoCompleto()) 
+			{
+				return false;
+			}
+		}
+		
+		return true;
 	}
 
 }

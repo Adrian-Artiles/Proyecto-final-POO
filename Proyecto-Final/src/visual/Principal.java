@@ -18,6 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
@@ -154,9 +155,16 @@ public class Principal extends JFrame {
 		JMenuItem mntmRegPlan = new JMenuItem("crear plan");
 		mntmRegPlan.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				RegPlan rp = new RegPlan();
-				rp.setModal(true);
-				rp.setVisible(true);
+				if(!Orange.getInstancia().getServicios().isEmpty()) 
+				{
+					RegPlan rp = new RegPlan();
+					rp.setModal(true);
+					rp.setVisible(true);
+				}
+				else 
+				{
+					JOptionPane.showMessageDialog(null, "Debe de crear algun servicio primero", "Falta Los servicios", JOptionPane.WARNING_MESSAGE);
+				}
 			}
 		});
 		mntmRegPlan.setFont(new Font("SansSerif", Font.PLAIN, 12));
