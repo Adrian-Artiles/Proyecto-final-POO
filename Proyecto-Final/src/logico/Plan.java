@@ -53,4 +53,12 @@ public class Plan implements Serializable{
     public void setServicios(ArrayList<Servicio> servicios) {
         this.servicios = servicios;
     }
+
+	@Override
+	public String toString()
+	{
+		return "Plan " + nombre + " [" + codigo + "]";
+	}
+    
+    
 }

@@ -222,7 +222,7 @@ public class Orange implements Serializable
 
 		return null;
 	}
-	
+
 	public boolean usuarioRepetido(String user) 
 	{
 		for (Persona p : usuarios) 
@@ -281,7 +281,7 @@ public class Orange implements Serializable
 		generarCodCliente++;
 
 		guardarArchivo();
-		
+
 	}
 
 	public void regServicio(Servicio s)
@@ -291,15 +291,33 @@ public class Orange implements Serializable
 		generarCodServ++;
 
 		guardarArchivo();
-		
+
 	}
 
 	public void regPlan(Plan p)
 	{
 		planes.add(p);
-		
+
 		generarCodPlan++;
 
+		guardarArchivo();
+	}
+
+	public void regContrato(Contrato ct)
+	{
+		contratos.add(ct);
+
+		generarCodCont++;
+
+		guardarArchivo();
+	}
+
+	public void regFactura(Factura ft)
+	{
+		ventas.add(ft);
+		
+		generarCodFact++;
+		
 		guardarArchivo();
 	}
 

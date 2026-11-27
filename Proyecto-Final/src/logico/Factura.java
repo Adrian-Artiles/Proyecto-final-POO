@@ -1,6 +1,7 @@
 package logico;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Factura implements Serializable {
@@ -9,26 +10,18 @@ public class Factura implements Serializable {
 	 */
 	private static final long serialVersionUID = -6184703847509367981L;
 	private String codigo;
-    private float total, itbis;
+    private float precio, itbis, total;
     private Plan plan;
-    private Date fecha;
+    private LocalDate fecha;
+    private boolean pagada;
 
-    public Factura(String codigo, Plan plan, Date fecha) {
+    public Factura(String codigo, Plan plan, LocalDate fecha, float precio) {
         this.codigo = codigo;
-        this.itbis = calcularItbis();
-        this.total = calcularTotal();
+        this.precio = precio;
+        this.itbis = precio * Orange.ITBIS;
+        this.total = precio + itbis;
         this.plan = plan;
         this.fecha = fecha;
-    }
-
-    private float calcularTotal()
-	{
-		return plan.getPrecio() + itbis;
-	}
-    
-    private float calcularItbis() 
-    {
-    	return (float) (plan.getPrecio() * Orange.ITBIS);
     }
 
 	public String getCodigo() {
@@ -65,13 +58,34 @@ public class Factura implements Serializable {
         this.plan = plan;
     }
 
-    public Date getFecha() {
-        return fecha;
-    }
+	public float getPrecio()
+	{
+		return precio;
+	}
 
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-    
+	public void setPrecio(float precio)
+	{
+		this.precio = precio;
+	}
+
+	public LocalDate getFecha()
+	{
+		return fecha;
+	}
+
+	public void setFecha(LocalDate fecha)
+	{
+		this.fecha = fecha;
+	}
+
+	public boolean isPagada()
+	{
+		return pagada;
+	}
+
+	public void setPagada(boolean pagada)
+	{
+		this.pagada = pagada;
+	}
     
 }

@@ -39,7 +39,7 @@ public class Cable extends Servicio
 	@Override
 	public String toString()
 	{
-		return cantCanales + " canales disponibles " + (hd ? "Incluyendo la definicion HD" : "") + "(RD$ " + precio + ")";
+		return cantCanales + " canales disponibles" + (hd ? " Incluyendo la definicion HD" : "") + " (RD$ " + precio + ")";
 	}
 	
 }
